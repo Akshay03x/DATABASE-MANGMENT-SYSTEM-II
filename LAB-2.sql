@@ -1,33 +1,34 @@
 select * from EMPLOYEE_info
 
 
---1. Display all the employees whose name starts with ìmî and 4 th character is ìhî.
+--1. Display all the employees whose name starts with ‚Äúm‚Äù and 4 th character is ‚Äúh‚Äù.
 
 select ename from employee_info
 where ename like'm__h%'
 
 --2. Find the value of 3 raised to 5. Label the column as output.
-
+select POWER(3,5) as output
 
 	
 --3. Write a query to subtract 20 days from the current date.
 	select dateadd(day,-20,getdate())
 
 
---4. Write a query to display name of employees whose name starts with ìjî and contains ìnî in their name.
+--4. Write a query to display name of employees whose name starts with ‚Äúj‚Äù and contains ‚Äún‚Äù in their name.
 select ename from employee_info
 where ename like 'j%'
 	and ename like '%n%'
 
---5. Display 2nd to 9th character of the given string ìSQL Programmingî.
+--5. Display 2nd to 9th character of the given string ‚ÄúSQL Programming‚Äù.
 select substring('SQL Programming',2,9)
 
---6. Display name of the employees whose city name ends with ìneyî &contains six characters.
+--6. Display name of the employees whose city name ends with ‚Äúney‚Äù &contains six characters.
 select ename from employee_info
 where city like '%___ney'
 
 --7. Write a query to convert value 15 to string.
-
+select CONVERT(varchar(10),15)
+select cast (15 AS VARCHAR(10))
 
 
 --8. Add department column with varchar (20) to Employee table.
@@ -40,7 +41,7 @@ update employee_info set department='marketing'
 where city='London'
 
 
---10. Display all the employees whose name ends with either ìnî or ìyî.
+--10. Display all the employees whose name ends with either ‚Äún‚Äù or ‚Äúy‚Äù.
 select ename from employee_info
 where ename like '%n'
 	or ename like '%y'
@@ -68,6 +69,7 @@ select city,max(salary) from employee_info
 group by city;
 
 --16. Produce output like <Ename> works at <city> and earns <salary> (In single column).
+SELECT CONCAT(ENAME,'WORKS AT',CITY,'AND EARNS',SALARY) FROM employee_info
 
 
 
@@ -89,7 +91,7 @@ where salary>5000
 			group by city
 
 
---20. Write a query to replace ìuî with ìooî in Ename.
+--20. Write a query to replace ‚Äúu‚Äù with ‚Äúoo‚Äù in Ename.
 
 select  ename, replace(ename,'u','oo') from employee_info
 

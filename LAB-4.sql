@@ -1,239 +1,330 @@
---• Stored Procedures
+select * from department2
+select * from Designation2
+select * from person2
 
---1. All tables Insert, Update & Delete
---INSERT
-	--Department
-		CREATE PROC PR_DEPARTMENT_INSERT
-			@DEPARTMENTID	INT,
-			@DEPARTMENTNAME VARCHAR(100)
-		AS
-		BEGIN
-			INSERT INTO DEPARTMENT VALUES
-			(@DEPARTMENTID,	
-			 @DEPARTMENTNAME)
-		END
+sp_rename 'department', 'department2';
+sp_rename 'designation','designation2';
+sp_rename 'person','person2';
 
-		EXEC PR_DEPARTMENT_INSERT 1,'ADMIN'
-		EXEC PR_DEPARTMENT_INSERT 2,'IT'
-		EXEC PR_DEPARTMENT_INSERT 3,'HR'
-		EXEC PR_DEPARTMENT_INSERT 4,'ACCOUNT'
+--1
+Create Procedure PR_Insert_Person
+@FirstName			varchar(100),
+@Lastname			varchar(100),
+@Salary				decimal(8,2),
+@JoiningDate		datetime,
+@DepartmentID		int,
+@DesignationId		int
+As
+Begin
+	INSERT INTO PERSON2(
+	
+	FirstName,		
+	Lastname,		
+	Salary	,		
+	JoiningDate	,
+	DepartmentID,
+	DesignationId	
+	)
+	VALUES
+	(@FirstName,		
+	 @Lastname,	
+	 @Salary,			
+	 @JoiningDate,	
+	 @DepartmentID,
+	 @DesignationId
+	 )
+END
 
-		SELECT * FROM DEPARTMENT
+--2
 
-	--DESIGNATION 
-		CREATE PROC PR_DESIGNATION_INSERT
-			@DESIGNATIONID		INT,
-			@DESIGNATIONNAME	VARCHAR(100)
-		AS
-		BEGIN
-			INSERT INTO DESIGNATION VALUES
-			(@DESIGNATIONID,	
-			 @DESIGNATIONNAME)
-		END
+CREATE PROC PR_INSERT_DEPARTMENT
+@DEPARTMENTID		INT,
+@DEPARTMENTNAME		VARCHAR(100)
+AS
+BEGIN
+	INSERT INTO department2
+	VALUES(@DEPARTMENTID,@DEPARTMENTNAME);
+END
 
-		EXEC PR_DESIGNATION_INSERT 11,'JOBBER'
-		EXEC PR_DESIGNATION_INSERT 12,'WELDER'
-		EXEC PR_DESIGNATION_INSERT 13,'CLERK'
-		EXEC PR_DESIGNATION_INSERT 14,'MANAGER'
-		EXEC PR_DESIGNATION_INSERT 15,'CEO'
+--3 
+CREATE PROC PR_INSERT_DESIGNATION
+@DESIGNATIONID		INT,
+@DESIGNATIONNAME	VARCHAR(100)
+AS BEGIN
+	INSERT INTO Designation2
+	VALUES(@DESIGNATIONID,	
+		   @DESIGNATIONNAME);
+END
 
-		SELECT * FROM DESIGNATION
+--4 
+CREATE PROC PR_UPDATE_PERSON
+@WORKERID			INT,
+@FirstName			varchar(100),
+@Lastname			varchar(100),
+@Salary				decimal(8,2),
+@JoiningDate		datetime,
+@DepartmentID		int,
+@DesignationId		int
+As
+Begin
+	UPDATE PERSON2
+	SET FIRSTNAME = @FirstName,		
+		LASTNAME = @Lastname,	
+		SALARY = @Salary,			
+		JOININGDATE = @JoiningDate,	
+		DEPARTMENTID = @DepartmentID,
+		DESIGNATIONID = @DesignationId
+	WHERE
+		WORKERID = @WORKERID;
+	
+	
+END
 
-	--Person 
-		Create Proc PR_Person_Insert
-			@FirstName		varchar(100),
-			@LastName		varchar(100),
-			@Salary			Decimal(8,2),
-			@JoiningDate	Datetime,
-			@DepartmentID	int,
-			@DesignationID	int
-		AS
-		Begin
-			INSERT INTO PERSON VALUES
-			(@FirstName,		
-			 @LastName,	
-			 @Salary,		
-			 @JoiningDate,
-			 @DepartmentID,
-			 @DesignationID)
-		END	
 
-		EXEC PR_Person_Insert 'RAHUL','ANSHU',56000,'1990-01-01',1,12
-		EXEC PR_Person_Insert 'HARDIK','HINSU',18000,'1990-09-25',2,11
-		EXEC PR_Person_Insert 'BHAVIN','KAMANI',25000,'1991-05-14',NULL,11
-		EXEC PR_Person_Insert 'BHOOMI','PATEL',39000,'2014-02-20',1,13
-		EXEC PR_Person_Insert 'ROHIT','RAJGOR',17000,'1990-07-23',2,15
-		EXEC PR_Person_Insert 'PRIYA','MEHTA',25000,'1990-10-18',2,NULL
-		EXEC PR_Person_Insert 'NEHA','TRIVEDI',18000,'2014-02-20',3,15
+--5 
+CREATE PROC PR_UPDATE_DEPARTMENT
+@DEPARTMENTID   INT,
+@DEPARTMENTNAME VARCHAR(100)
+AS BEGIN
+	UPDATE Department2
+	SET 
+		DepartmentName = @DEPARTMENTNAME
+	WHERE 
+		DEPARTMENTID = @DEPARTMENTID
+END
 
-		SELECT * FROM PERSON
-			
---UPDATE
-	--PERSON
-		CREATE PROC PR_PERSON_UPDATE
-			@WORKERID INT,
-			@SALARY   DECIMAL(8,2)
-		AS
-		BEGIN
-			UPDATE PERSON
-			SET SALARY=@SALARY
-			WHERE WORKERID=@WORKERID
-		END 
-		
-		EXEC PR_PERSON_UPDATE 105,20000
-		SELECT * FROM PERSON
 
-	--DEPARTMENT
-		CREATE PROC PR_DEPARTMENT_UPDATE
-			@DEPARTMENTID	INT,
-			@DEPARTMENTNAME VARCHAR(100)
-		AS
-		BEGIN
-			UPDATE DEPARTMENT
-			SET DEPARTMENTNAME=@DEPARTMENTNAME
-			WHERE DEPARTMENTID=@DEPARTMENTID
-		END
-		
-		EXEC PR_DEPARTMENT_UPDATE 1,'ADMIN1'
-		SELECT * FROM DEPARTMENT
+--6 
+CREATE PROC PR_UPDATE_DESIGNATION
+@DESIGNATIONID   INT,
+@DESIGNATIONNAME VARCHAR(100)
+AS BEGIN 
+	UPDATE Designation2
+		SET DESIGNATIONNAME = @DESIGNATIONNAME;
+END
 
-	--DESIGNATION
-		CREATE PROC PR_DESIGNATION_UPDATE
-			@DESIGNATIONID	 INT,
-			@DESIGNATIONNAME VARCHAR(100)
-		AS
-		BEGIN
-			UPDATE DESIGNATION
-			SET DESIGNATIONNAME=@DESIGNATIONNAME
-			WHERE DESIGNATIONID=@DESIGNATIONID
-		END
-		
-		EXEC PR_DESIGNATION_UPDATE 11,'JOBBER1'
-		SELECT * FROM DESIGNATION
 
---DELETE
-	--PERSON
-		CREATE PROC PR_PERSON_DELETE
-			@WORKERID	INT
-		AS
-		BEGIN
-			DELETE FROM PERSON 
-			WHERE WORKERID=@WORKERID
-		END
 
-		EXEC PR_PERSON_DELETE 106
-		SELECT * FROM PERSON
+--7 
+CREATE PROC PR_DELETE_PERSON
+@WORKERID INT
+AS BEGIN
+	DELETE FROM Person2
+		WHERE WorkerID = @WORKERID
+END
 
-	--DEPARTMENT
-		CREATE PROC PR_DEPARTMENT_DELETE
-			@DEPARTMENTID	INT
-		AS
-		BEGIN
-			DELETE FROM DEPARTMENT 
-			WHERE DEPARTMENTID=@DEPARTMENTID
-		END
+--8
+CREATE PROC PR_DELETE_DEPARTMENT
+@DEPARTMENTID INT
+AS BEGIN
+	DELETE FROM Department2
+		WHERE DepartmentID = @DEPARTMENTID
 
-		EXEC PR_DEPARTMENT_DELETE 4
-		SELECT * FROM DEPARTMENT
+END
 
-	--DESIGNATION
-		CREATE PROC PR_DESIGNATION_DELETE
-			@DESIGNATIONID	INT
-		AS
-		BEGIN
-			DELETE FROM DESIGNATION 
-			WHERE DESIGNATIONID=@DESIGNATIONID
-		END
+--9 
 
-		EXEC PR_DESIGNATION_DELETE 14
-		SELECT * FROM DESIGNATION
---2. All tables SelectAll (If foreign key is available than do write join and take columns on select list)
-	--PERSON
-		ALTER PROC PR_PERSON_SELECTALL
-		AS
-		BEGIN
-			SELECT PERSON.WORKERID,
-				   PERSON.FIRSTNAME,
-				   PERSON.LASTNAME,
-				   PERSON.SALARY,
-				   PERSON.JOININGDATE,
-				   DEPARTMENT.DEPARTMENTNAME,
-				   DESIGNATION.DESIGNATIONNAME
-			FROM PERSON LEFT OUTER JOIN DEPARTMENT 
-			ON PERSON.DEPARTMENTID=DEPARTMENT.DEPARTMENTID
-			LEFT OUTER JOIN DESIGNATION 
-			ON PERSON.DESIGNATIONID=DESIGNATION.DESIGNATIONID	 
-		END
-		
-		EXEC PR_PERSON_SELECTALL
+CREATE PROC PR_DELETE_DESIGNATION
+@DESIGNATIONID INT
+AS BEGIN 
+	DELETE FROM Designation2
+		WHERE DesignationID = @DESIGNATIONID
+END
 
-	--DEPARTMENT
-		CREATE PROC PR_DEPARTMENT_SELECTALL
-		AS
-		BEGIN
-			SELECT DEPARTMENTID,DEPARTMENTNAME FROM DEPARTMENT
-		END
 
-		EXEC PR_DEPARTMENT_SELECTALL
+--All tables SelectAll (If foreign key is available than do write join and take columns on select list)
 
-	--DESIGNATION
-		CREATE PROC PR_DESIGNATION_SELECTALL
-		AS
-		BEGIN
-			SELECT DESIGNATIONID,DESIGNATIONNAME FROM DESIGNATION
-		END
-		
-		EXEC PR_DESIGNATION_SELECTALL
---3. All tables SelectPK
-	--PERSON
-		CREATE PROC PR_PERSON_SELECTPK
-			@WORKERID	INT
-		AS
-		BEGIN
-			SELECT * FROM PERSON
-			WHERE WORKERID=@WORKERID
-		END
+CREATE PROC PR_SELECT_ALL
+AS 
+	SELECT WORKERID, FIRSTNAME, LASTNAME, SALARY, JOININGDATE, P.DepartmentID, DEPARTMENTNAME, P.DESIGNATIONID, DESIGNATIONNAME 
+	FROM PERSON2 P INNER JOIN Department2 DP 
+	ON P.DepartmentID  = DP.DepartmentID
+	INNER JOIN Designation2 DS
+	ON P.DesignationID = DS.DesignationID;
 
-		EXEC PR_PERSON_SELECTPK 101
 
-	--DEPARTMENT
-		CREATE PROC PR_DEPARTMENT_SELECTPK
-			@DEPARTMENTID	INT
-		AS
-		BEGIN
-			SELECT * FROM DEPARTMENT
-			WHERE DEPARTMENTID=@DEPARTMENTID
-		END
 
-		EXEC PR_DEPARTMENT_SELECTPK 1
+CREATE PROC PR_SELECT_DEPARTMENT
+AS SELECT * FROM Department2;
 
-	--DESIGNATION
-		CREATE PROC PR_DESIGNATION_SELECTPK
-			@DESIGNATIONID	INT
-		AS
-		BEGIN
-			SELECT * FROM DESIGNATION
-			WHERE DESIGNATIONID=@DESIGNATIONID
-		END
 
-		EXEC PR_DESIGNATION_SELECTPK 11
---4. Create Procedure that takes Department Name & Designation Name as Input and Returns a 
---table with Worker’s First Name, Salary, Joining Date & Department Name.
-	ALTER PROC PR_PERSON_RETURNTABLE
-		@DEPARTMENTNAME		VARCHAR(100),
-		@DESIGNATIONNAME	VARCHAR(100)
-	AS
-	BEGIN
-		SELECT P.FIRSTNAME,P.SALARY,P.JOININGDATE,D.DEPARTMENTNAME
-		FROM PERSON P LEFT OUTER JOIN DEPARTMENT D
-		ON P.DEPARTMENTID=D.DEPARTMENTID 
-		LEFT OUTER JOIN DESIGNATION DE
-		ON P.DESIGNATIONID=DE.DESIGNATIONID
-		WHERE D.DEPARTMENTNAME=@DEPARTMENTNAME AND DE.DESIGNATIONNAME=@DESIGNATIONNAME
-	END
+CREATE PROC PR_SELECT_DESIGNATION
+AS SELECT * FROM Designation2;
 
-	EXEC PR_PERSON_RETURNTABLE 'ADMIN1','WELDER'
---5. Create Procedure that takes FirstName as an input parameter and displays’ all the details of 
---the worker with their department & designation name.
 
---6. Create Procedure which displays department wise maximum, minimum & total salaries.
+--All tables SelectPK
+
+CREATE PROC PR_SELECT_PERSON_BY_PK
+@WORKERID INT
+AS
+	SELECT * FROM PERSON2
+		WHERE WORKERID=@WORKERID;
+
+
+CREATE PROC PR_SELECT_DEPARTMENT_BY_PK
+@DEPARTMENTID INT
+AS 
+	SELECT * FROM DEPARTMENT2;
+
+
+CREATE PROC PR_SELECT_DESIGNATION_BY_PK
+@DESIGNATIONID INT
+AS 
+	SELECT * FROM DESIGNATION2	
+		WHERE DESIGNATIONID = @DESIGNATIONID;
+
+
+--Create Procedure that takes Department Name & Designation Name as Input and Returns a 
+--table with Workerï¿½s First Name, Salary, Joining Date & Department Name
+
+CREATE PROC PR_TABLE_PERSON
+@DEPARTMENTNAME   VARCHAR(100),
+@DESIGNATIONNAME  VARCHAR(100)
+AS 
+	
+	SELECT  FIRSTNAME, LASTNAME, SALARY, JOININGDATE,  DEPARTMENTNAME
+	FROM PERSON2 P INNER JOIN Department2 DP 
+	ON P.DepartmentID  = DP.DepartmentID
+	INNER JOIN Designation2 DS
+	ON P.DesignationID = DS.DesignationID
+
+	WHERE DEPARTMENTNAME = @DEPARTMENTNAME AND DESIGNATIONNAME = @DESIGNATIONNAME;
+
+-- Create Procedure that takes FirstName as an input parameter and displaysï¿½ all the details of 
+--the worker with their department & designation name
+
+CREATE PROC PR_FIRSTNAME_DETAILS
+@FIRSTNAME VARCHAR(100)
+AS 
+	SELECT WORKERID, FIRSTNAME, LASTNAME, SALARY, JOININGDATE,  DEPARTMENTNAME, DesignationName
+	FROM PERSON2 P INNER JOIN Department2 DP 
+	ON P.DepartmentID  = DP.DepartmentID
+	INNER JOIN Designation2 DS
+	ON P.DesignationID = DS.DesignationID
+
+	WHERE FIRSTNAME = @FIRSTNAME;
+
+
+
+EXEC PR_FIRSTNAME_DETAILS BHOOMI
+
+-- Create Procedure which displays department wise maximum, minimum & total salaries.
+
+CREATE PROC PR_SELECT_MAX_MIN_TOTAL_SALARY_BY_DEPARTMENTNAME
+AS 
+	SELECT DepartmentNAME, MAX(SALARY) AS 'MAX_SAL', MIN(SALARY) AS 'MIN_SAL', SUM(SALARY) AS 'TOTAL_SAL' FROM PERSON2 P INNER JOIN Department2 DP
+	ON P.DepartmentID  = DP.DepartmentID
+	GROUP BY DepartmentName;
+
+
+--Create Views
+
+
+--1 . Create a view that display first 100 workers details.
+
+Create View View_Top100
+As
+	Select top 100 * from person2;
+
+select * from View_Top100
+
+
+--2 Create a view that displays designation wise maximum, minimum & total salaries.
+
+create View View_Min_Max_Total_Salary_By_Designation
+As
+	SELECT DesignationName, MAX(SALARY) AS 'MAX_SAL', MIN(SALARY) AS 'MIN_SAL', SUM(SALARY) AS 'TOTAL_SAL' FROM Person2 P INNER JOIN designation2 DG
+	ON P.DesignationID = DG.DesignationID
+	GROUP BY DG.DesignationName;
+
+SELECT * FROM View_Min_Max_Total_Salary_By_Designation;
+
+--3 Create a view that displays Workerï¿½s first name with their salaries & joining date, it also displays
+--  duration column which is difference of joining date with respect to current date.
+
+CREATE VIEW VIEW_FIRSTNAME_SALARY_JOININGDATE_DURATION
+AS
+	SELECT FIRSTNAME, SALARY, JOININGDATE, DATEDIFF(YEAR,JoiningDate,GETDATE()) AS 'DURATION' FROM Person2;
+
+SELECT * FROM VIEW_FIRSTNAME_SALARY_JOININGDATE_DURATION;
+
+
+--4 Create a view which shows department & designation wise total number of workers.
+
+CREATE VIEW VIEW_TOTAL_WORKER_BY_DEPARTMENT_DESIGNATION
+AS
+	SELECT DESIGNATIONNAME,DEPARTMENTNAME,COUNT(WORKERID) AS 'TOTAL_WORKER'
+	FROM PERSON2 P INNER JOIN Department2 DP 
+	ON P.DepartmentID  = DP.DepartmentID
+	INNER JOIN Designation2 DS
+	ON P.DesignationID = DS.DesignationID
+	GROUP BY DS.DESIGNATIONNAME, DP.DEPARTMENTNAME;
+
+SELECT * FROM VIEW_TOTAL_WORKER_BY_DEPARTMENT_DESIGNATION;
+
+
+--5 Create a view that displays worker names who donï¿½t have either in any department or designation.
+
+CREATE VIEW VIEW_WORKER_WITHOUT_DEPARTMENT_OR_DESIGNATION
+AS 
+	SELECT FIRSTNAME FROM Person2 
+	WHERE DepartmentId IS NULL OR DesignationID IS NULL;
+
+SELECT * FROM VIEW_WORKER_WITHOUT_DEPARTMENT_OR_DESIGNATION;
+
+
+
+
+
+
+--Create Function
+
+--1 Create a table valued function which accepts DepartmentID as a parameter & returns a worker
+--  table based on DepartmentID.
+
+CREATE FUNCTION FUN_SELECT_BY_DEPARTMENTID(@DEPARTMENTID INT)
+RETURNS TABLE
+AS
+	RETURN (SELECT * FROM Person2 WHERE DepartmentId = @DEPARTMENTID);
+
+select * from dbo.FUN_SELECT_BY_DEPARTMENTID(1);
+
+
+--2 Create a table valued function which returns a table with unique city names from worker table.
+
+alter FUNCTION FUN_UNIQUE_CITY_FROM_WORKER()
+RETURNS TABLE
+AS 
+	RETURN (SELECT DISTINCT CITY FROM worker)
+
+
+--3 Create a scalar valued function which accepts two parameters start date & end date, and
+--  returns a date difference in days
+
+CREATE FUNCTION FUN_DIFFERENCE_IN_DAYS(@StartDate datetime, @EndDate datetime)
+RETURNS INT
+AS 
+BEGIN
+	RETURN (DATEDIFF(DAY,'@STARTDATE','@ENDDATE'));
+END
+
+--4,5  Create a scalar valued function which accepts two parameters year in integer & month in
+--   integer and returns total days in passed month & year.
+
+
+CREATE FUNCTION FUN_TOTAL_DAYS_BY_MONTH_AND_YEAR(@MONTH INT, @YEAR INT)
+RETURNS INT
+AS
+BEGIN
+		DECLARE @Date DATE = CAST(
+                            CAST(@Year AS CHAR(4)) 
+                            + RIGHT('0' + CAST(@Month AS VARCHAR(2)), 2)
+                            + '01' AS DATE);
+
+        RETURN DATEDIFF(DAY,  
+							DATEADD(MONTH, DATEDIFF(MONTH, 0, @Date), 0),
+																			DATEADD(MONTH, DATEDIFF(MONTH, 0, @Date) + 1, 0));
+
+END
+
+ select DBO.FUN_TOTAL_DAYS_BY_MONTH_AND_YEAR(7,2022)

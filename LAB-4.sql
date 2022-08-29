@@ -328,3 +328,62 @@ BEGIN
 END
 
  select DBO.FUN_TOTAL_DAYS_BY_MONTH_AND_YEAR(7,2022)
+ 
+ 
+ ------------------------------------PPT Query s----------------------------------------------------------------
+select * from student
+insert into student values(110,'mahesh','cc',5,5.5)
+delete from student
+where rno=109
+update student set cpi=10
+where rno=101
+select * from msg
+select * from mag2
+
+---------------1-----------------------
+create trigger tr_insert
+on student
+for update
+as
+begin
+
+	declare @rno int,@name varchar(100),@branch varchar(50),@semester int ,@cpi decimal(4,2);
+	select @rno=rno,@name=name,@branch=branch,@semester=semester,@cpi=cpi from inserted
+	insert into msg values(@rno,@name,@branch,@semester,@cpi);
+end
+
+-------------------2-----------------------
+alter trigger tr_insert_2
+on student
+for insert
+as begin
+	declare @name varchar(100);
+	select @name =name from inserted
+	insert into mag2 values(concat('inserted student name =',@name));
+end
+
+--------------------------3--------------------------------
+alter trigger tr_delete_3
+on student
+for delete
+as begin
+	declare @rno int;
+	select @rno=rno from deleted
+	insert into mag2 values(concat('delete  student roll no is =',@rno));
+end
+------------------------------4------------------------------------
+select * from marks
+insert into marks values(10,10,10)
+
+create trigger tr_result
+on marks
+for insert 
+as 
+begin 
+declare @sub1 decimal(8,2),@sub3 decimal(8,2) ,@sub2 decimal(8,2),@total decimal(8,2) ;
+select @sub1=sub1 ,@sub2=sub2,@sub3=sub3 from inserted
+set @total=@sub1+@sub2+@sub3;
+insert into total values(@total);
+end
+
+select * from total

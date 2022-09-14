@@ -1,0 +1,132 @@
+show dbs
+Bank_Info  72.00 KiB
+Employee   72.00 KiB
+admin      40.00 KiB
+config     96.00 KiB
+local      72.00 KiB
+show collections
+Deposite
+db.Deposite.find()
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+{ _id: ObjectId("6321edefa9661c745f8fcb6f"),
+  ActNo: 102,
+  CName: 'Sunil',
+  BName: 'AJNI',
+  Amount: 50000,
+  ADate: '4-1-96' }
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"),
+  ActNo: 103,
+  CName: 'Mehul',
+  BName: 'KAROLBAGH',
+  Amount: 3500,
+  ADate: '17-11-95' }
+db.Deposite.find().limit(1)
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+db.Deposite.find().limit(1).skip(2)
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"),
+  ActNo: 103,
+  CName: 'Mehul',
+  BName: 'KAROLBAGH',
+  Amount: 3500,
+  ADate: '17-11-95' }
+db.Deposite.find({ActNo:101})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+db.Deposite.find({ActNo:{$eq:101}})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+db.Deposite.find({ActNo:{$lt:110}})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+{ _id: ObjectId("6321edefa9661c745f8fcb6f"),
+  ActNo: 102,
+  CName: 'Sunil',
+  BName: 'AJNI',
+  Amount: 50000,
+  ADate: '4-1-96' }
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"),
+  ActNo: 103,
+  CName: 'Mehul',
+  BName: 'KAROLBAGH',
+  Amount: 3500,
+  ADate: '17-11-95' }
+db.Deposite.find().sort({ActNo:1})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+{ _id: ObjectId("6321edefa9661c745f8fcb6f"),
+  ActNo: 102,
+  CName: 'Sunil',
+  BName: 'AJNI',
+  Amount: 50000,
+  ADate: '4-1-96' }
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"),
+  ActNo: 103,
+  CName: 'Mehul',
+  BName: 'KAROLBAGH',
+  Amount: 3500,
+  ADate: '17-11-95' }
+db.Deposite.find().sort({ActNo:-1})
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"),
+  ActNo: 103,
+  CName: 'Mehul',
+  BName: 'KAROLBAGH',
+  Amount: 3500,
+  ADate: '17-11-95' }
+{ _id: ObjectId("6321edefa9661c745f8fcb6f"),
+  ActNo: 102,
+  CName: 'Sunil',
+  BName: 'AJNI',
+  Amount: 50000,
+  ADate: '4-1-96' }
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }
+db.Deposite.find({},{ActNo:true})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"), ActNo: 101 }
+{ _id: ObjectId("6321edefa9661c745f8fcb6f"), ActNo: 102 }
+{ _id: ObjectId("6321f28ea9661c745f8fcb70"), ActNo: 103 }
+db.Deposite.find({},{ActNo:true,_id:false})
+{ ActNo: 101 }
+{ ActNo: 102 }
+{ ActNo: 103 }
+db.Deposite.find($or:[ActNo:101,ActNo:1110])
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.find($or:[{ActNo:101,ActNo:1110}])
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.find({$or:[{ActNo:101,ActNo:1110}]})
+db.Deposite.find({ActNo:{$lte:101}})
+{ _id: ObjectId("6321eda6a9661c745f8fcb6e"),
+  ActNo: 101,
+  CName: 'Anil',
+  BName: 'VRCE',
+  Amount: 1000,
+  ADate: '1-3-95' }

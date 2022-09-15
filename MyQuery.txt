@@ -130,3 +130,405 @@ db.Deposite.find({ActNo:{$lte:101}})
   BName: 'VRCE',
   Amount: 1000,
   ADate: '1-3-95' }
+  
+  show databases
+Bank_info   72.00 KiB
+admin       40.00 KiB
+config     108.00 KiB
+local       72.00 KiB
+use Bank_info
+'switched to db Bank_info'
+db.createCollection("Deposite")
+MongoServerError: Collection Bank_info.Deposite already exists.
+db.Deposite.find()
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+{ _id: ObjectId("63200c08241b8d97c59c3ab2"),
+  ACTNO: 102,
+  CNAME: 'Sunil',
+  BNAME: 'AJNI',
+  AMOUNT: 5000,
+  ADATE: '19966-04-01' }
+{ _id: ObjectId("63200c84241b8d97c59c3ab3") }
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+{ _id: ObjectId("63200e30241b8d97c59c3ab5"),
+  ACTNO: 104,
+  CNAME: 'Madhuri',
+  BNAME: 'CHANDI',
+  AMOUNT: 1200,
+  ADATE: '17-12-1995' }
+{ _id: ObjectId("63200e30241b8d97c59c3ab6"),
+  ACTNO: 105,
+  CNAME: 'Prmod',
+  BNAME: 'M.G.ROAD',
+  AMOUNT: 3000,
+  ADATE: '27-03-1996' }
+db.Deposite.find().pretty()
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+{ _id: ObjectId("63200c08241b8d97c59c3ab2"),
+  ACTNO: 102,
+  CNAME: 'Sunil',
+  BNAME: 'AJNI',
+  AMOUNT: 5000,
+  ADATE: '19966-04-01' }
+{ _id: ObjectId("63200c84241b8d97c59c3ab3") }
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+{ _id: ObjectId("63200e30241b8d97c59c3ab5"),
+  ACTNO: 104,
+  CNAME: 'Madhuri',
+  BNAME: 'CHANDI',
+  AMOUNT: 1200,
+  ADATE: '17-12-1995' }
+{ _id: ObjectId("63200e30241b8d97c59c3ab6"),
+  ACTNO: 105,
+  CNAME: 'Prmod',
+  BNAME: 'M.G.ROAD',
+  AMOUNT: 3000,
+  ADATE: '27-03-1996' }
+db.Deposite.findOne(\)
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.findOne()
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+db.Deposite.find({ACTNO:101})
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+db.Deposite.find({ACTNO:{$eq:101}})
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+db.Deposite.find({ACTNO:{$lt:103}})
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+{ _id: ObjectId("63200c08241b8d97c59c3ab2"),
+  ACTNO: 102,
+  CNAME: 'Sunil',
+  BNAME: 'AJNI',
+  AMOUNT: 5000,
+  ADATE: '19966-04-01' }
+db.Deposite.find({$or:{ACTNO:{$lt:103}},{CNAME:Mehul}})
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.find({$or:[{ACTNO:{$lt:103}},{CNAME:Mehul}]})
+ReferenceError: Mehul is not defined
+db.Deposite.find({$or:[{ACTNO:{$lt:103}},{CNAME:'Mehul'}]})
+{ _id: ObjectId("63200ba4241b8d97c59c3ab1"),
+  ACTNO: 101,
+  CNAME: 'Anil',
+  BNAME: 'VRCE',
+  AMOUNT: 1000,
+  ADATE: '1995-01-03' }
+{ _id: ObjectId("63200c08241b8d97c59c3ab2"),
+  ACTNO: 102,
+  CNAME: 'Sunil',
+  BNAME: 'AJNI',
+  AMOUNT: 5000,
+  ADATE: '19966-04-01' }
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+db.Deposite.find({$or:[{ACTNO:{$eq:103}},{CNAME:'Mehul'}]})
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+db.Deposite.find({$and:[{ACTNO:{$eq:103}},{CNAME:'Mehul'}]})
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+db.Deposite.find({$and:[{ACTNO:{$eq:103}},{CNAME:'Mehu'}]})
+db.Deposite.find({$and:[{ACTNO:{$eq:103}},{CNAME:'Mehul'}]})
+{ _id: ObjectId("63200e30241b8d97c59c3ab4"),
+  ACTNO: 103,
+  CNAME: 'Mehul',
+  BNAME: 'KEROLBAGH',
+  AMOUNT: 3500,
+  ADATE: '17-11-1995' }
+db.Deposite.find({$and:[{ACTNO:102},{CNAME:'Arjun'}]})
+db.Deposite.find({$and:[{ACTNO:102},{CNAME:'Sunil'}]})
+{ _id: ObjectId("63200c08241b8d97c59c3ab2"),
+  ACTNO: 102,
+  CNAME: 'Sunil',
+  BNAME: 'AJNI',
+  AMOUNT: 5000,
+  ADATE: '19966-04-01' }
+  db.Deposite.find({ACTNO:{$in:[105,108]}})
+{ _id: ObjectId("6322b33006c7442db789b079"),
+  ACTNO: 105,
+  CName: 'prmod',
+  BName: 'm.g.road',
+  AMOUNT: 3000,
+  ADATE: '1996-03-27T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07c"),
+  ACTNO: 108,
+  CName: 'kranti',
+  BName: 'nehru place',
+  AMOUNT: 5000,
+  ADATE: '1995-07-02T00:00:00' }
+db.Deposite.find({ACTNO:{$not:{$gt:105}}})
+{ _id: ObjectId("6322b33006c7442db789b075"),
+  ACTNO: 101,
+  CName: 'anil',
+  BName: 'vrce',
+  AMOUNT: 1000,
+  ADATE: '1995-03-01T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b076"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b077"),
+  ACTNO: 103,
+  CName: 'mehul',
+  BName: 'karolbagh',
+  AMOUNT: 3500,
+  ADATE: '1995-11-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b078"),
+  ACTNO: 104,
+  CName: 'madhuri',
+  BName: 'chandi',
+  AMOUNT: 1200,
+  ADATE: '1995-12-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b079"),
+  ACTNO: 105,
+  CName: 'prmod',
+  BName: 'm.g.road',
+  AMOUNT: 3000,
+  ADATE: '1996-03-27T00:00:00' }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+db.Deposite.find({},{CNAME:true,BNAME:true,AMOUNT:true})
+{ _id: ObjectId("6322b33006c7442db789b075"), AMOUNT: 1000 }
+{ _id: ObjectId("6322b33006c7442db789b076"), AMOUNT: 5000 }
+{ _id: ObjectId("6322b33006c7442db789b077"), AMOUNT: 3500 }
+{ _id: ObjectId("6322b33006c7442db789b078"), AMOUNT: 1200 }
+{ _id: ObjectId("6322b33006c7442db789b079"), AMOUNT: 3000 }
+{ _id: ObjectId("6322b33006c7442db789b07a"), AMOUNT: 2000 }
+{ _id: ObjectId("6322b33006c7442db789b07b"), AMOUNT: 1000 }
+{ _id: ObjectId("6322b33006c7442db789b07c"), AMOUNT: 5000 }
+{ _id: ObjectId("6322b33006c7442db789b07d"), AMOUNT: 7000 }
+db.Deposite.find({},{CNAME:true,BNAME:true,AMOUNT:true,_id:false})
+{ AMOUNT: 1000 }
+{ AMOUNT: 5000 }
+{ AMOUNT: 3500 }
+{ AMOUNT: 1200 }
+{ AMOUNT: 3000 }
+{ AMOUNT: 2000 }
+{ AMOUNT: 1000 }
+{ AMOUNT: 5000 }
+{ AMOUNT: 7000 }
+db.Deposite.find({},{CName:true,BName:true,AMOUNT:true,_id:false})
+{ CName: 'anil', BName: 'vrce', AMOUNT: 1000 }
+{ CName: 'sunil', BName: 'ajni', AMOUNT: 5000 }
+{ CName: 'mehul', BName: 'karolbagh', AMOUNT: 3500 }
+{ CName: 'madhuri', BName: 'chandi', AMOUNT: 1200 }
+{ CName: 'prmod', BName: 'm.g.road', AMOUNT: 3000 }
+{ CName: 'sandip', BName: 'andheri', AMOUNT: 2000 }
+{ CName: 'shivani', BName: 'virar', AMOUNT: 1000 }
+{ CName: 'kranti', BName: 'nehru place', AMOUNT: 5000 }
+{ CName: 'minu', BName: 'powai', AMOUNT: 7000 }
+db.Deposite.find().sort({CName:1})
+{ _id: ObjectId("6322b33006c7442db789b075"),
+  ACTNO: 101,
+  CName: 'anil',
+  BName: 'vrce',
+  AMOUNT: 1000,
+  ADATE: '1995-03-01T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07c"),
+  ACTNO: 108,
+  CName: 'kranti',
+  BName: 'nehru place',
+  AMOUNT: 5000,
+  ADATE: '1995-07-02T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b078"),
+  ACTNO: 104,
+  CName: 'madhuri',
+  BName: 'chandi',
+  AMOUNT: 1200,
+  ADATE: '1995-12-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b077"),
+  ACTNO: 103,
+  CName: 'mehul',
+  BName: 'karolbagh',
+  AMOUNT: 3500,
+  ADATE: '1995-11-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07d"),
+  ACTNO: 109,
+  CName: 'minu',
+  BName: 'powai',
+  AMOUNT: 7000,
+  ADATE: '1995-08-10T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b079"),
+  ACTNO: 105,
+  CName: 'prmod',
+  BName: 'm.g.road',
+  AMOUNT: 3000,
+  ADATE: '1996-03-27T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07a"),
+  ACTNO: 106,
+  CName: 'sandip',
+  BName: 'andheri',
+  AMOUNT: 2000,
+  ADATE: '1996-03-31T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07b"),
+  ACTNO: 107,
+  CName: 'shivani',
+  BName: 'virar',
+  AMOUNT: 1000,
+  ADATE: '1995-09-05T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b076"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+db.Deposite.find().sort({ACTNO:-1})
+{ _id: ObjectId("6322b33006c7442db789b07d"),
+  ACTNO: 109,
+  CName: 'minu',
+  BName: 'powai',
+  AMOUNT: 7000,
+  ADATE: '1995-08-10T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07c"),
+  ACTNO: 108,
+  CName: 'kranti',
+  BName: 'nehru place',
+  AMOUNT: 5000,
+  ADATE: '1995-07-02T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07b"),
+  ACTNO: 107,
+  CName: 'shivani',
+  BName: 'virar',
+  AMOUNT: 1000,
+  ADATE: '1995-09-05T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07a"),
+  ACTNO: 106,
+  CName: 'sandip',
+  BName: 'andheri',
+  AMOUNT: 2000,
+  ADATE: '1996-03-31T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b079"),
+  ACTNO: 105,
+  CName: 'prmod',
+  BName: 'm.g.road',
+  AMOUNT: 3000,
+  ADATE: '1996-03-27T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b078"),
+  ACTNO: 104,
+  CName: 'madhuri',
+  BName: 'chandi',
+  AMOUNT: 1200,
+  ADATE: '1995-12-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b077"),
+  ACTNO: 103,
+  CName: 'mehul',
+  BName: 'karolbagh',
+  AMOUNT: 3500,
+  ADATE: '1995-11-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b076"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b075"),
+  ACTNO: 101,
+  CName: 'anil',
+  BName: 'vrce',
+  AMOUNT: 1000,
+  ADATE: '1995-03-01T00:00:00' }
+db.Deposite.find().limit(2)
+{ _id: ObjectId("6322b33006c7442db789b075"),
+  ACTNO: 101,
+  CName: 'anil',
+  BName: 'vrce',
+  AMOUNT: 1000,
+  ADATE: '1995-03-01T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b076"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+db.Deposite.find().limit(2).skip(2)
+{ _id: ObjectId("6322b33006c7442db789b077"),
+  ACTNO: 103,
+  CName: 'mehul',
+  BName: 'karolbagh',
+  AMOUNT: 3500,
+  ADATE: '1995-11-17T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b078"),
+  ACTNO: 104,
+  CName: 'madhuri',
+  BName: 'chandi',
+  AMOUNT: 1200,
+  ADATE: '1995-12-17T00:00:00' }
+db.Deposite.find().count()
+9
+db.Deposite.find({CName:/^S/i})
+{ _id: ObjectId("6322b33006c7442db789b076"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07a"),
+  ACTNO: 106,
+  CName: 'sandip',
+  BName: 'andheri',
+  AMOUNT: 2000,
+  ADATE: '1996-03-31T00:00:00' }
+{ _id: ObjectId("6322b33006c7442db789b07b"),
+  ACTNO: 107,
+  CName: 'shivani',
+  BName: 'virar',
+  AMOUNT: 1000,
+  ADATE: '1995-09-05T00:00:00' }

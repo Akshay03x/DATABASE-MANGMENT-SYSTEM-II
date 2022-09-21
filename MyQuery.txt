@@ -532,3 +532,76 @@ db.Deposite.find({CName:/^S/i})
   BName: 'virar',
   AMOUNT: 1000,
   ADATE: '1995-09-05T00:00:00' }
+
+
+use Bank_Info
+'switched to db Bank_Info'
+db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:""}}}]
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:"AMOUNT"}}}]
+Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
+db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:"$AMOUNT"}}}])
+{ _id: null, sum_val: 28700 }
+db.Deposite.aggregate([{$group:{_id:null,total:{$sum:"$AMOUNT"}}}])
+{ _id: null, total: 28700 }
+db.Deposite.updateMany([{ACTNO:108},{$set:{CNAME:'ABC',BNAME:'ABC'}}])
+MongoInvalidArgumentError: Update document requires atomic operators
+db.Deposite.updateMany({ACTNO:108},{$set:{CNAME:'ABC',BNAME:'ABC'}})
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+db.Deposite.deleteMany({ACTNO:108})
+{ acknowledged: true, deletedCount: 1 }
+db.deposite.find()
+db.Deposite.find()
+{ _id: ObjectId("632b43b91dfeeb72c3dc9792") }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9793"),
+  ACTNO: 101,
+  CName: 'anil',
+  BName: 'vrce',
+  AMOUNT: 1000,
+  ADATE: '1995-03-01T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9794"),
+  ACTNO: 102,
+  CName: 'sunil',
+  BName: 'ajni',
+  AMOUNT: 5000,
+  ADATE: '1996-01-04T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9795"),
+  ACTNO: 103,
+  CName: 'mehul',
+  BName: 'karolbagh',
+  AMOUNT: 3500,
+  ADATE: '1995-11-17T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9796"),
+  ACTNO: 104,
+  CName: 'madhuri',
+  BName: 'chandi',
+  AMOUNT: 1200,
+  ADATE: '1995-12-17T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9797"),
+  ACTNO: 105,
+  CName: 'prmod',
+  BName: 'm.g.road',
+  AMOUNT: 3000,
+  ADATE: '1996-03-27T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9798"),
+  ACTNO: 106,
+  CName: 'sandip',
+  BName: 'andheri',
+  AMOUNT: 2000,
+  ADATE: '1996-03-31T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc9799"),
+  ACTNO: 107,
+  CName: 'shivani',
+  BName: 'virar',
+  AMOUNT: 1000,
+  ADATE: '1995-09-05T00:00:00' }
+{ _id: ObjectId("632b43e11dfeeb72c3dc979b"),
+  ACTNO: 109,
+  CName: 'minu',
+  BName: 'powai',
+  AMOUNT: 7000,
+  ADATE: '1995-08-10T00:00:00' }

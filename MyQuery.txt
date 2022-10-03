@@ -1,11 +1,3 @@
-show dbs
-Bank_Info  72.00 KiB
-Employee   72.00 KiB
-admin      40.00 KiB
-config     96.00 KiB
-local      72.00 KiB
-show collections
-Deposite
 db.Deposite.find()
 { _id: ObjectId("6321eda6a9661c745f8fcb6e"),
   ActNo: 101,
@@ -534,14 +526,7 @@ db.Deposite.find({CName:/^S/i})
   ADATE: '1995-09-05T00:00:00' }
 
 
-use Bank_Info
-'switched to db Bank_Info'
-db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:""}}}]
-Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
-db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:"AMOUNT"}}}]
-Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
-db.Deposite.aggregate([{$group: {_id:null, sum_val:{$sum:"$AMOUNT"}}}])
-{ _id: null, sum_val: 28700 }
+--------------------------------------------------------------------------------------------------------
 db.Deposite.aggregate([{$group:{_id:null,total:{$sum:"$AMOUNT"}}}])
 { _id: null, total: 28700 }
 db.Deposite.updateMany([{ACTNO:108},{$set:{CNAME:'ABC',BNAME:'ABC'}}])

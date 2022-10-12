@@ -110,11 +110,7 @@ db.Deposite.find({},{ActNo:true,_id:false})
 { ActNo: 101 }
 { ActNo: 102 }
 { ActNo: 103 }
-db.Deposite.find($or:[ActNo:101,ActNo:1110])
-Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
-db.Deposite.find($or:[{ActNo:101,ActNo:1110}])
-Error: clone(t={}){const r=t.loc||{};return e({loc:new Position("line"in r?r.line:this.loc.line,"column"in r?r.column:...<omitted>...)} could not be cloned.
-db.Deposite.find({$or:[{ActNo:101,ActNo:1110}]})
+
 db.Deposite.find({ActNo:{$lte:101}})
 { _id: ObjectId("6321eda6a9661c745f8fcb6e"),
   ActNo: 101,

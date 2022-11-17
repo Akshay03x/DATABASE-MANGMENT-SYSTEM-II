@@ -1,4 +1,4 @@
-db.Deposite.find()
+jdb.Deposite.find()
 { _id: ObjectId("6321eda6a9661c745f8fcb6e"),
   ActNo: 101,
   CName: 'Anil',
@@ -9,7 +9,7 @@ db.Deposite.find()
   ActNo: 102,
   CName: 'Sunil',
   BName: 'AJNI',
-  Amount: 50000,
+  Amount: 50000
   ADate: '4-1-96' }
 { _id: ObjectId("6321f28ea9661c745f8fcb70"),
   ActNo: 103,
